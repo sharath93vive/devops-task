@@ -19,7 +19,7 @@ try {
 
   stage('Deploy') {
     node('master'){
-        sh "docker run -d -p 8085:5000 sharath94z/devops-task:{BUILD_NUMBER}"
+        sh "docker run -d -p 8085:5000 sharath94z/devops-task:${BUILD_NUMBER}"
     }
   }
 
