@@ -1,16 +1,10 @@
-properties([
-	parameters([
-        string(defaultValue: "master", description: 'Which Git Branch to clone?', name: 'GIT_BRANCH')
-	])
-])
-
 properties([pipelineTriggers([githubPush()])])
 
 try {
 
   stage('Checkout'){
     node('master'){
-        checkout([$class: 'GitSCM', branches: [[name: '*/$GIT_BRANCH']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/sharath93vive/devops-task.git']]])
+        checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/sharath93vive/devops-task.git']]])
     }
   }
   stage('Build'){
