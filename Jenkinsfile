@@ -16,13 +16,13 @@ try {
   stage('Destroy'){
     node('master'){
       sh '''
-      docker ps -a -q --filter="name=devops-task" | wc -l 
-      if [ $? -eq 0 ]; then
-	      echo "Stoppping and deleting previous container " $(docker ps -a -q --filter="name=devops-task")
-	      docker rm $(docker stop $(docker ps -a -q --filter="name=devops-task"))
-      else
-	      echo "No previous container running"
-      fi
+          status=`docker ps -a -q --filter="name=devops-task" | wc -l`
+          if [ ${status} -gt 0 ]; then
+            echo "Stoppping and deleting previous container " $(docker ps -a -q --filter="name=devops-task")
+            docker container rm $(docker container stop $(docker container ls -a -q --filter="name=devops-task"))
+          else
+            echo "No previous container running"
+          fi
       '''
     }
   }
