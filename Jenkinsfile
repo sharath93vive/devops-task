@@ -4,6 +4,8 @@ properties([
 	])
 ])
 
+properties([pipelineTriggers([githubPush()])])
+
 try {
 
   stage('Checkout'){
